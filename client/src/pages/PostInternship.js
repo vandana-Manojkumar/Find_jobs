@@ -6,7 +6,7 @@ import { AuthContext } from '../context/AuthContext';
 const PostInternship = () => {
   const { isAuthenticated, user } = useContext(AuthContext);
   const navigate = useNavigate();
-  
+
   const [formData, setFormData] = useState({
     title: '',
     location: '',
@@ -17,9 +17,9 @@ const PostInternship = () => {
   });
   const [formError, setFormError] = useState(null);
   const [loading, setLoading] = useState(false);
-  
+
   const { title, location, description, requirements, stipend, duration } = formData;
-  
+
   useEffect(() => {
     if (!isAuthenticated) {
       navigate('/login');
@@ -39,16 +39,16 @@ const PostInternship = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validate form
     if (!title || !location || !description || !requirements || !duration) {
       setFormError('Please fill in all required fields');
       return;
     }
-    
+
     try {
       setLoading(true);
-      await axios.post('https://socialaddress-manoj-backend.onrender.com/api/internships', formData);
+      await axios.post('https://find-jobs-9smp.onrender.com/api/internships', formData);
       navigate('/dashboard');
     } catch (err) {
       setFormError(err.response?.data?.message || 'Error creating internship');
@@ -62,9 +62,9 @@ const PostInternship = () => {
     <div className="post-internship-page">
       <div className="container">
         <h1>Post New Internship</h1>
-        
+
         {formError && <div className="alert alert-danger">{formError}</div>}
-        
+
         <form onSubmit={onSubmit} className="internship-form">
           <div className="form-group">
             <label htmlFor="title">Internship Title*</label>
@@ -78,7 +78,7 @@ const PostInternship = () => {
               required
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="location">Location*</label>
             <input
@@ -91,7 +91,7 @@ const PostInternship = () => {
               required
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="duration">Duration*</label>
             <input
@@ -104,7 +104,7 @@ const PostInternship = () => {
               required
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="stipend">Stipend (Optional)</label>
             <input
@@ -116,7 +116,7 @@ const PostInternship = () => {
               placeholder="e.g., $1000/month, Unpaid"
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="description">Description*</label>
             <textarea
@@ -129,7 +129,7 @@ const PostInternship = () => {
               required
             ></textarea>
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="requirements">Requirements*</label>
             <textarea
@@ -142,7 +142,7 @@ const PostInternship = () => {
               required
             ></textarea>
           </div>
-          
+
           <div className="form-actions">
             <button type="button" className="btn-secondary" onClick={() => navigate('/dashboard')}>
               Cancel

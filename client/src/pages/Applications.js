@@ -27,7 +27,7 @@ const Applications = () => {
   const fetchApplications = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('https://socialaddress-manoj-backend.onrender.com/api/applications/me');
+      const res = await axios.get('https://find-jobs-9smp.onrender.com/api/applications/me');
       setApplications(res.data);
       setError(null);
     } catch (err) {
@@ -66,9 +66,9 @@ const Applications = () => {
     <div className="applications-page">
       <div className="container">
         <h1>My Applications</h1>
-        
+
         {error && <div className="alert alert-danger">{error}</div>}
-        
+
         {applications.length === 0 ? (
           <div className="empty-state">
             <h3>You haven't applied to any internships yet</h3>
@@ -86,20 +86,20 @@ const Applications = () => {
                     {application.status.charAt(0).toUpperCase() + application.status.slice(1)}
                   </span>
                 </div>
-                
+
                 <div className="application-details">
                   <p><strong>Company:</strong> {application.internship.company}</p>
                   <p><strong>Location:</strong> {application.internship.location}</p>
                   <p><strong>Applied on:</strong> {formatDate(application.createdAt)}</p>
                 </div>
-                
+
                 {application.coverLetter && (
                   <div className="cover-letter">
                     <h3>Your Cover Letter</h3>
                     <p>{application.coverLetter}</p>
                   </div>
                 )}
-                
+
                 <div className="application-footer">
                   <Link to={`/internship/${application.internship._id}`} className="btn-secondary">
                     View Internship

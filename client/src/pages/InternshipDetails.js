@@ -23,7 +23,7 @@ const InternshipDetails = () => {
   const fetchInternship = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`https://socialaddress-manoj-backend.onrender.com/api/internships/${id}`);
+      const res = await axios.get(`https://find-jobs-9smp.onrender.com/api/internships/${id}`);
       setInternship(res.data);
       setError(null);
     } catch (err) {
@@ -36,7 +36,7 @@ const InternshipDetails = () => {
 
   const checkApplicationStatus = async () => {
     try {
-      const res = await axios.get('https://socialaddress-manoj-backend.onrender.com/api/applications/me');
+      const res = await axios.get('https://find-jobs-9smp.onrender.com/api/applications/me');
       const application = res.data.find(app => app.internship._id === id);
       if (application) {
         setApplicationStatus(application.status);
@@ -48,18 +48,18 @@ const InternshipDetails = () => {
 
   const handleApply = async (e) => {
     e.preventDefault();
-    
+
     if (!isAuthenticated) {
       navigate('/login');
       return;
     }
-    
+
     try {
-      await axios.post('https://socialaddress-manoj-backend.onrender.com/api/applications', {
+      await axios.post('https://find-jobs-9smp.onrender.com/api/applications', {
         internshipId: id,
         coverLetter
       });
-      
+
       setApplicationStatus('pending');
       alert('Your application has been submitted successfully.');
     } catch (err) {
@@ -84,14 +84,14 @@ const InternshipDetails = () => {
         <div className="back-link">
           <Link to="/">&larr; Back to Internships</Link>
         </div>
-        
+
         <div className="internship-details">
           <div className="internship-header">
             <h1>{internship.title}</h1>
             <p className="company">{internship.company}</p>
             <p className="posted-date">Posted on {formatDate(internship.createdAt)}</p>
           </div>
-          
+
           <div className="internship-meta">
             <div className="meta-item">
               <span className="meta-label">Location:</span>
@@ -108,19 +108,19 @@ const InternshipDetails = () => {
               </div>
             )}
           </div>
-          
+
           <div className="internship-content">
             <div className="content-section">
               <h2>Description</h2>
               <p>{internship.description}</p>
             </div>
-            
+
             <div className="content-section">
               <h2>Requirements</h2>
               <p>{internship.requirements}</p>
             </div>
           </div>
-          
+
           {isAuthenticated && user?.role === 'applicant' && (
             <div className="application-section">
               {applicationStatus ? (
@@ -148,7 +148,7 @@ const InternshipDetails = () => {
               )}
             </div>
           )}
-          
+
           {isAuthenticated && user?.role === 'employer' && user?._id === internship.postedBy && (
             <div className="employer-actions">
               <Link to={`/dashboard`} className="btn-secondary">
@@ -156,7 +156,7 @@ const InternshipDetails = () => {
               </Link>
             </div>
           )}
-          
+
           {!isAuthenticated && (
             <div className="auth-prompt">
               <p>Please <Link to="/login">login</Link> or <Link to="/register">register</Link> as an applicant to apply for this internship.</p>

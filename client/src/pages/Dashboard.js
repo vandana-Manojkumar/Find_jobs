@@ -29,7 +29,7 @@ const Dashboard = () => {
   const fetchEmployerInternships = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('https://socialaddress-manoj-backend.onrender.com/api/internships/employer/me');
+      const res = await axios.get('https://find-jobs-9smp.onrender.com/api/internships/employer/me');
       setInternships(res.data);
 
       if (res.data.length > 0) {
@@ -46,7 +46,7 @@ const Dashboard = () => {
 
   const fetchApplications = async (internshipId) => {
     try {
-      const res = await axios.get(`https://socialaddress-manoj-backend.onrender.com/api/applications/internship/${internshipId}`);
+      const res = await axios.get(`https://find-jobs-9smp.onrender.com/api/applications/internship/${internshipId}`);
       console.log('Fetched applications:', res.data); // For debugging
       setApplications({
         ...applications,
@@ -67,7 +67,7 @@ const Dashboard = () => {
 
   const handleApplicationStatus = async (applicationId, status) => {
     try {
-      await axios.put(`https://socialaddress-manoj-backend.onrender.com/api/applications/${applicationId}`, { status });
+      await axios.put(`https://find-jobs-9smp.onrender.com/api/applications/${applicationId}`, { status });
 
       if (selectedInternship && Array.isArray(applications[selectedInternship])) {
         const updatedApplications = applications[selectedInternship].map(app =>
@@ -91,7 +91,7 @@ const Dashboard = () => {
     }
 
     try {
-      await axios.delete(`https://socialaddress-manoj-backend.onrender.com/api/internships/${internshipId}`);
+      await axios.delete(`https://find-jobs-9smp.onrender.com/api/internships/${internshipId}`);
       setInternships(internships.filter(internship => internship._id !== internshipId));
 
       if (selectedInternship === internshipId) {

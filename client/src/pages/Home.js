@@ -19,18 +19,18 @@ const Home = () => {
   const fetchInternships = async () => {
     try {
       setLoading(true);
-      let url = `https://socialaddress-manoj-backend.onrender.com/api/internships?sort=${sort}`;
-      
+      let url = `https://find-jobs-9smp.onrender.com/api/internships?sort=${sort}`;
+
       if (location) {
         url += `&location=${location}`;
       }
-      
+
       if (search) {
         url += `&search=${search}`;
       }
-      
+
       const res = await axios.get(url);
-      console.log("Fetched data:", res.data); 
+      console.log("Fetched data:", res.data);
       setInternships(Array.isArray(res.data) ? res.data : []);
 
       setError(null);
@@ -54,7 +54,7 @@ const Home = () => {
     // Delay to wait for state update
     setTimeout(fetchInternships, 0);
   };
-  
+
 
   return (
     <div className="home-page">
@@ -107,15 +107,15 @@ const Home = () => {
             <p>No internships found. Try adjusting your search.</p>
           ) : (
             <div className="internships-grid">
-             {Array.isArray(internships) && internships.length > 0 ? (
-  <div className="internships-grid">
-    {internships.map((internship) => (
-      <InternshipCard key={internship._id} internship={internship} />
-    ))}
-  </div>
-) : (
-  <p>No internships found. Try adjusting your search.</p>
-)}
+              {Array.isArray(internships) && internships.length > 0 ? (
+                <div className="internships-grid">
+                  {internships.map((internship) => (
+                    <InternshipCard key={internship._id} internship={internship} />
+                  ))}
+                </div>
+              ) : (
+                <p>No internships found. Try adjusting your search.</p>
+              )}
 
             </div>
           )}
@@ -125,5 +125,5 @@ const Home = () => {
   );
 };
 
-export default Home; 
+export default Home;
 

@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
       if (localStorage.getItem('token')) {
         setAuthToken(localStorage.getItem('token'));
         try {
-          const res = await axios.get('https://socialaddress-manoj-backend.onrender.com/api/auth/user');
+          const res = await axios.get('https://find-jobs-9smp.onrender.com/api/auth/user');
           setUser(res.data);
           setIsAuthenticated(true);
         } catch (err) {
@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     try {
       setError(null);
-      const res = await axios.post('https://socialaddress-manoj-backend.onrender.com/api/auth/register', userData);
+      const res = await axios.post('https://find-jobs-9smp.onrender.com/api/auth/register', userData);
       localStorage.setItem('token', res.data.token);
       setAuthToken(res.data.token);
       setUser(res.data);
@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (userData) => {
     try {
       setError(null);
-      const res = await axios.post('https://socialaddress-manoj-backend.onrender.com/api/auth/login', userData);
+      const res = await axios.post('https://find-jobs-9smp.onrender.com/api/auth/login', userData);
       localStorage.setItem('token', res.data.token);
       setAuthToken(res.data.token);
       setUser(res.data);
