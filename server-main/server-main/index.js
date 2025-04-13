@@ -14,7 +14,7 @@ const app = express();
 // Middleware
 
 app.use(cors({
-  origin: 'https://find-jobs-chi.vercel.app/', 
+  origin: 'https://find-jobs-chi.vercel.app', 
   credentials: true 
 }));
 
